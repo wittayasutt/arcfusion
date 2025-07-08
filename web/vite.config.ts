@@ -16,6 +16,7 @@ export default defineConfig({
 			'@templates': path.resolve(process.cwd(), 'src/components/templates'),
 			'@features': path.resolve(process.cwd(), 'src/features'),
 			'@pages': path.resolve(process.cwd(), 'src/pages'),
+			'@stores': path.resolve(process.cwd(), 'src/stores'),
 			'@assets': path.resolve(process.cwd(), 'src/assets'),
 		},
 	},
