@@ -1,11 +1,7 @@
-import { ToggleSidebar } from '@components';
+import { ChatLayout } from '@components';
 
 function App() {
-	return (
-		<>
-			<ToggleSidebar />
-		</>
-	);
+	return <ChatLayout>Test</ChatLayout>;
 }
 
 export default App;

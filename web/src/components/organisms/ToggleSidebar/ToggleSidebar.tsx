@@ -15,7 +15,7 @@ function ToggleSidebar({ children }: ToggleSidebarProps) {
 	return (
 		<div
 			className={clsx(
-				'h-dvh [max-width:calc(100dvw-1rem)] bg-blue-800',
+				'bg-primary h-dvh [max-width:calc(100dvw-1rem)]',
 				isOpen ? 'w-64' : 'w-10',
 			)}
 		>
