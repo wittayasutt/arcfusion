@@ -1,4 +1,4 @@
-import { Navbar, ToggleSidebar } from '@organisms';
+import { Navbar, Sidebar } from '@organisms';
 
 type ChatLayoutProps = {
 	children?: ReactNode;
@@ -7,8 +7,8 @@ type ChatLayoutProps = {
 function ChatLayout({ children }: ChatLayoutProps) {
 	return (
 		<div className="flex">
-			<ToggleSidebar />
-			<div className="flex flex-col w-full">
+			<Sidebar />
+			<div className="flex w-full flex-col">
 				<Navbar />
 				{children}
 			</div>

@@ -10,9 +10,9 @@ function DarkModeSwitch() {
 	};
 
 	const label = isDarkMode ? (
-		<MoonIcon className="h-5 w-5 text-black" />
+		<MoonIcon className="h-5 w-5 text-black dark:text-white" />
 	) : (
-		<SunIcon className="h-5 w-5 text-black" />
+		<SunIcon className="h-5 w-5 text-black dark:text-white" />
 	);
 
 	return (

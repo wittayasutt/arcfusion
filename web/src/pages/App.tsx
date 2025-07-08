@@ -1,7 +1,11 @@
-import { ChatLayout } from '@components';
+import { ChatContent, ChatLayout } from '@components';
 
 function App() {
-	return <ChatLayout>Test</ChatLayout>;
+	return (
+		<ChatLayout>
+			<ChatContent />
+		</ChatLayout>
+	);
 }
 
 export default App;

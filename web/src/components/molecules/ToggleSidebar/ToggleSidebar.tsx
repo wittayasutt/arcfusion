@@ -15,13 +15,13 @@ function ToggleSidebar({ children }: ToggleSidebarProps) {
 	return (
 		<div
 			className={clsx(
-				'bg-primary h-dvh [max-width:calc(100dvw-1rem)]',
-				isOpen ? 'w-64' : 'w-10',
+				'bg-primary h-dvh',
+				isOpen ? 'w-64 [max-width:calc(100dvw-1rem)]' : 'w-10',
 			)}
 		>
-			<div className="flex justify-end">
+			<div className="flex min-h-10 justify-end border-b border-gray-300">
 				<div
-					className="flex h-10 w-10 cursor-pointer items-center justify-center"
+					className="flex min-h-full w-10 cursor-pointer items-center justify-center"
 					onClick={handleToggle}
 				>
 					<ViewVerticalIcon className="h-5 w-5 text-white" />
