@@ -16,14 +16,15 @@ function ChatLayout({ children }: ChatLayoutProps) {
 			<Sidebar />
 			<main className="flex w-full flex-col">
 				<Navbar
+					className="fixed top-0 z-10"
 					leftLabel={
 						<PanelLeftIcon
-							className="h-5 w-5 cursor-pointer"
+							className="size-5 cursor-pointer"
 							onClick={toggleSidebar}
 						/>
 					}
 				/>
-				{children}
+				<div className="pt-10">{children}</div>
 			</main>
 		</>
 	);

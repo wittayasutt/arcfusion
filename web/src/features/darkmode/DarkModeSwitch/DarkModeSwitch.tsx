@@ -11,9 +11,9 @@ function DarkModeSwitch() {
 	};
 
 	const icon = isDarkMode ? (
-		<Moon className="h-5 w-5" />
+		<Moon className="size-5" />
 	) : (
-		<Sun className="h-5 w-5" />
+		<Sun className="size-5" />
 	);
 
 	return (

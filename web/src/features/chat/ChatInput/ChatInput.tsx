@@ -49,7 +49,7 @@ export function ChatInput() {
 							<FormControl>
 								<Textarea
 									placeholder="Ask anything"
-									className="resize-none"
+									className="max-h-[25vh] resize-none overflow-y-auto"
 									onKeyDown={handleKeyDown}
 									{...field}
 								/>
