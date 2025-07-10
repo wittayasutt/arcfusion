@@ -71,14 +71,14 @@ class ChatSummary(BaseModel):
 
     chat_id: str
     message_count: int
-    first_question: str = None
-    last_message_time: str = None
+    first_question: Optional[str] = None
+    last_message_time: Optional[str] = None
 
 
 class AllChatsResponse(BaseModel):
     """Response model for all chats endpoint"""
 
-    chats: List[ChatSummary]
+    chats: Optional[List[ChatSummary]] = []
     total_sessions: int
     total_messages: int
 

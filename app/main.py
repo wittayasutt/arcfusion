@@ -157,8 +157,12 @@ async def get_all_chats():
     chat_summaries = []
 
     for chat_id, messages in all_chats.items():
-        first_question = messages[0]["question"] if messages else None
-        last_message_time = messages[-1]["timestamp"] if messages else None
+        if messages:
+            first_question = messages[0]["question"]
+            last_message_time = messages[-1]["timestamp"]
+        else:
+            first_question = None
+            last_message_time = None
 
         chat_summaries.append(
             ChatSummary(
