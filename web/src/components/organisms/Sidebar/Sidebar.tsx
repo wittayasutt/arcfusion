@@ -6,19 +6,17 @@ import { Sidebar as UiSidebar } from '@ui/sidebar';
 function Sidebar() {
 	const items = [
 		{
-			label: 'Home',
+			label:
+				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis culpa quam nobis iste quasi a quae eum commodi quos magni quo reprehenderit dolorem cum quis, et ullam, fugit asperiores quisquam.',
+			onClickRemove: () => {
+				// TODO: Implement remove chat
+			},
 		},
 		{
 			label: 'Inbox',
-		},
-		{
-			label: 'Calendar',
-		},
-		{
-			label: 'Search',
-		},
-		{
-			label: 'Settings',
+			onClickRemove: () => {
+				// TODO: Implement remove chat
+			},
 		},
 	];
 
