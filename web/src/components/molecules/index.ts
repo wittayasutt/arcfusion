@@ -1,1 +1,2 @@
-export { default as ToggleSidebar } from './ToggleSidebar';
+export { default as SidebarContent } from './SidebarContent';
+export { default as SidebarHeader } from './SidebarHeader';

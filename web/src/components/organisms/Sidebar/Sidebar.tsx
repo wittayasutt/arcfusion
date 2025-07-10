@@ -1,68 +1,49 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { SquarePen } from 'lucide-react';
 
-import {
-	Sidebar as UiSidebar,
-	SidebarContent,
-	SidebarMenu,
-	SidebarGroup,
-	SidebarGroupContent,
-	SidebarGroupLabel,
-	SidebarMenuButton,
-	SidebarMenuItem,
-	SidebarHeader,
-} from '@/components/ui/sidebar';
+import { SidebarContent, SidebarHeader } from '@molecules';
+import { Sidebar as UiSidebar } from '@ui/sidebar';
 
 function Sidebar() {
 	const items = [
 		{
-			title: 'Home',
-			url: '#',
-			icon: Home,
+			label: 'Home',
 		},
 		{
-			title: 'Inbox',
-			url: '#',
-			icon: Inbox,
+			label: 'Inbox',
 		},
 		{
-			title: 'Calendar',
-			url: '#',
-			icon: Calendar,
+			label: 'Calendar',
 		},
 		{
-			title: 'Search',
-			url: '#',
-			icon: Search,
+			label: 'Search',
 		},
 		{
-			title: 'Settings',
-			url: '#',
-			icon: Settings,
+			label: 'Settings',
+		},
+	];
+
+	const sidebarGroups = [
+		{
+			items: [
+				{
+					icon: <SquarePen />,
+					label: 'New chat',
+					onClick: () => {
+						// TODO: Implement new chat
+					},
+				},
+			],
+		},
+		{
+			title: 'Chats',
+			items,
 		},
 	];
 
 	return (
 		<UiSidebar>
-			<SidebarHeader>SidebarHeader</SidebarHeader>
-			<SidebarContent>
-				<SidebarGroup>
-					<SidebarGroupLabel>Application</SidebarGroupLabel>
-					<SidebarGroupContent>
-						<SidebarMenu>
-							{items.map((item) => (
-								<SidebarMenuItem key={item.title}>
-									<SidebarMenuButton asChild>
-										<a href={item.url}>
-											<item.icon />
-											<span>{item.title}</span>
-										</a>
-									</SidebarMenuButton>
-								</SidebarMenuItem>
-							))}
-						</SidebarMenu>
-					</SidebarGroupContent>
-				</SidebarGroup>
-			</SidebarContent>
+			<SidebarHeader />
+			<SidebarContent sidebarGroups={sidebarGroups} />
 		</UiSidebar>
 	);
 }
