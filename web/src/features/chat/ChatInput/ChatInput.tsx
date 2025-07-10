@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Carousel } from '@molecules';
+import { CarouselMessages } from '@molecules';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
 import { Textarea } from '@ui/textarea';
@@ -59,7 +59,7 @@ export function ChatInput() {
 					<h3 className="text-muted-foreground mb-2 text-sm">
 						Recent PDF files
 					</h3>
-					<Carousel messages={mockMessages} />
+					<CarouselMessages messages={mockMessages} />
 				</div>
 			) : null}
 			<Form {...form}>

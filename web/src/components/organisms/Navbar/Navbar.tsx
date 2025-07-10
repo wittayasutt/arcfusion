@@ -16,10 +16,7 @@ function Navbar({ leftLabel, className }: NavbarProps) {
 				className,
 			)}
 		>
-			<div className="flex items-center gap-2">
-				{leftLabel}
-				<h2 className="font-bold">ArcFusion</h2>
-			</div>
+			<div className="flex items-center gap-2">{leftLabel}</div>
 			<DarkModeSwitch />
 		</nav>
 	);
