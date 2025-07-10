@@ -14,7 +14,7 @@ function ChatContent() {
 					<ChatResetSession noSession={false} onClick={() => {}} />
 				</div>
 				<div className="flex flex-1">Chat</div>
-				<div className="sticky bottom-0 mb-8">
+				<div className="sticky bottom-0 mb-6">
 					<ChatInput />
 				</div>
 			</div>
