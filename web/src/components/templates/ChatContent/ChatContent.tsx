@@ -18,7 +18,9 @@ function ChatContent() {
 						onClick={() => {}}
 					/>
 				</div>
-				<ChatMessages />
+				<div className="flex-1">
+					<ChatMessages />
+				</div>
 				<div className="bg-background sticky bottom-0 pb-6">
 					<ChatInput />
 				</div>

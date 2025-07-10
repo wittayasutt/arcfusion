@@ -66,7 +66,7 @@ function ChatMessages({ messages }: ChatMessagesProps) {
 	}, [messages]);
 
 	return (
-		<div>
+		<>
 			{sortedMessages.map((message) => (
 				<MessageInteraction
 					key={message.id}
@@ -74,7 +74,7 @@ function ChatMessages({ messages }: ChatMessagesProps) {
 					question={message.question}
 				/>
 			))}
-		</div>
+		</>
 	);
 }
 

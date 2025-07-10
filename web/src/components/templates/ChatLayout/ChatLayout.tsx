@@ -24,7 +24,7 @@ function ChatLayout({ children }: ChatLayoutProps) {
 						/>
 					}
 				/>
-				<div className="pt-10">{children}</div>
+				<div className="h-full pt-10">{children}</div>
 			</main>
 		</>
 	);
