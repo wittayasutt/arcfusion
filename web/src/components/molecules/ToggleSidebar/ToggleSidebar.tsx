@@ -15,16 +15,16 @@ function ToggleSidebar({ children }: ToggleSidebarProps) {
 	return (
 		<div
 			className={clsx(
-				'bg-primary h-dvh',
+				'bg-primary text-primary-foreground h-dvh',
 				isOpen ? 'w-64 [max-width:calc(100dvw-1rem)]' : 'w-10',
 			)}
 		>
-			<div className="flex min-h-10 justify-end border-b border-gray-300">
+			<div className="border-primary-foreground flex min-h-10 justify-end border-b">
 				<div
 					className="flex min-h-full w-10 cursor-pointer items-center justify-center"
 					onClick={handleToggle}
 				>
-					<PanelLeft className="h-5 w-5 text-white" />
+					<PanelLeft className="h-5 w-5" />
 				</div>
 			</div>
 			{children}
