@@ -1,3 +1,7 @@
+import { PanelLeftIcon } from 'lucide-react';
+import { type ReactNode } from 'react';
+
+import { SidebarProvider, useSidebar } from '@ui/sidebar';
 import { Navbar, Sidebar } from '@organisms';
 
 type ChatLayoutProps = {
@@ -5,15 +9,32 @@ type ChatLayoutProps = {
 };
 
 function ChatLayout({ children }: ChatLayoutProps) {
+	const { toggleSidebar } = useSidebar();
+
 	return (
-		<div className="flex">
+		<>
 			<Sidebar />
-			<div className="flex w-full flex-col">
-				<Navbar />
+			<main className="flex w-full flex-col">
+				<Navbar
+					leftLabel={
+						<PanelLeftIcon
+							className="h-5 w-5 cursor-pointer"
+							onClick={toggleSidebar}
+						/>
+					}
+				/>
 				{children}
-			</div>
-		</div>
+			</main>
+		</>
 	);
 }
 
-export default ChatLayout;
+function ChatLayoutWrapper(props: ChatLayoutProps) {
+	return (
+		<SidebarProvider>
+			<ChatLayout {...props} />
+		</SidebarProvider>
+	);
+}
+
+export default ChatLayoutWrapper;

@@ -6,15 +6,19 @@ type DarkModeStore = {
 };
 
 const getInitialDarkMode = (): boolean => {
-	console.log('typeof window', typeof window);
 	if (typeof window !== 'undefined') {
+		const isDarkMode = localStorage.getItem('darkMode');
+		if (isDarkMode !== null) {
+			return isDarkMode === 'true';
+		}
 		return document.documentElement.getAttribute('class') === 'dark';
 	}
-	return false;
+
+	// Default to dark mode if window is undefined
+	return true;
 };
 
 const updateHtmlTheme = (isDarkMode: boolean) => {
-	console.log('typeof window isDarkMode', typeof window);
 	if (typeof window !== 'undefined') {
 		document.documentElement.setAttribute(
 			'class',
@@ -23,14 +27,22 @@ const updateHtmlTheme = (isDarkMode: boolean) => {
 	}
 };
 
-const useDarkMode = create<DarkModeStore>((set) => ({
-	isDarkMode: getInitialDarkMode(),
-	switchDarkMode: () =>
-		set((state) => {
-			const newDarkMode = !state.isDarkMode;
-			updateHtmlTheme(newDarkMode);
-			return { isDarkMode: newDarkMode };
-		}),
-}));
+const useDarkMode = create<DarkModeStore>((set) => {
+	const initialDarkMode = getInitialDarkMode();
+	updateHtmlTheme(initialDarkMode);
+
+	return {
+		isDarkMode: initialDarkMode,
+		switchDarkMode: () =>
+			set((state) => {
+				const newDarkMode = !state.isDarkMode;
+				updateHtmlTheme(newDarkMode);
+				if (typeof window !== 'undefined') {
+					localStorage.setItem('darkMode', newDarkMode.toString());
+				}
+				return { isDarkMode: newDarkMode };
+			}),
+	};
+});
 
 export default useDarkMode;
