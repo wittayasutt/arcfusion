@@ -1,5 +1,6 @@
+import { Moon, Sun } from 'lucide-react';
+
 import { Switch } from '@components';
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useDarkMode } from '@stores';
 
 function DarkModeSwitch() {
@@ -9,16 +10,16 @@ function DarkModeSwitch() {
 		switchDarkMode();
 	};
 
-	const label = isDarkMode ? (
-		<MoonIcon className="h-5 w-5 text-black dark:text-white" />
+	const icon = isDarkMode ? (
+		<Moon className="h-5 w-5" />
 	) : (
-		<SunIcon className="h-5 w-5 text-black dark:text-white" />
+		<Sun className="h-5 w-5" />
 	);
 
 	return (
 		<Switch
 			checked={isDarkMode}
-			label={label}
+			label={icon}
 			onCheckedChange={handleSwitchDarkMode}
 		/>
 	);

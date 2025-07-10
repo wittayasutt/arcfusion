@@ -29,10 +29,12 @@
 			"@/*": ["src/*"],
 			"@assets/*": ["src/assets/*"],
 			"@components": ["src/components"],
+			"@components/*": ["src/components/*"],
 			"@atoms": ["src/components/atoms"],
 			"@molecules": ["src/components/molecules"],
 			"@organisms": ["src/components/organisms"],
 			"@templates": ["src/components/templates"],
+			"@ui/*": ["src/components/ui/*"],
 			"@features/*": ["src/features/*"],
 			"@pages/*": ["src/pages/*"],
 			"@stores": ["src/stores"]

@@ -1,4 +1,4 @@
-import { ViewVerticalIcon } from '@radix-ui/react-icons';
+import { PanelLeft } from 'lucide-react';
 import clsx from 'clsx';
 import { useState, type ReactNode } from 'react';
 
@@ -24,7 +24,7 @@ function ToggleSidebar({ children }: ToggleSidebarProps) {
 					className="flex min-h-full w-10 cursor-pointer items-center justify-center"
 					onClick={handleToggle}
 				>
-					<ViewVerticalIcon className="h-5 w-5 text-white" />
+					<PanelLeft className="h-5 w-5 text-white" />
 				</div>
 			</div>
 			{children}
