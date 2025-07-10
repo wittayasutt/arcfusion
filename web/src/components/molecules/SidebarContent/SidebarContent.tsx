@@ -4,9 +4,9 @@ import {
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
-	SidebarMenuButton,
 	SidebarMenuItem,
 } from '@ui/sidebar';
+import { SidebarMenuButton } from '@atoms';
 
 import { type SidebarGroupType } from './types';
 
@@ -28,15 +28,7 @@ function SidebarContent({ sidebarGroups }: SidebarContentProps) {
 								<SidebarMenu>
 									{sidebarGroup?.items?.map((sidebarGroupItem, itemIndex) => (
 										<SidebarMenuItem key={itemIndex}>
-											<SidebarMenuButton asChild>
-												<div
-													className="cursor-pointer"
-													onClick={sidebarGroupItem?.onClick}
-												>
-													{sidebarGroupItem.icon}
-													<span>{sidebarGroupItem?.label}</span>
-												</div>
-											</SidebarMenuButton>
+											<SidebarMenuButton {...sidebarGroupItem} />
 										</SidebarMenuItem>
 									))}
 								</SidebarMenu>

@@ -1,10 +1,4 @@
-import { type ReactNode } from 'react';
-
-export type SidebarItemType = {
-	icon?: ReactNode;
-	label: string;
-	onClick?: () => void;
-};
+import { type SidebarItemType } from '@atoms/SidebarMenuButton';
 
 export type SidebarGroupType = {
 	items: SidebarItemType[];
