@@ -16,7 +16,7 @@ function ChatLayout({ children }: ChatLayoutProps) {
 			<Sidebar />
 			<main className="flex w-full flex-col">
 				<Navbar
-					className="fixed top-0 z-10"
+					className="sticky top-0 z-10"
 					leftLabel={
 						<PanelLeftIcon
 							className="size-5 cursor-pointer"
@@ -24,7 +24,7 @@ function ChatLayout({ children }: ChatLayoutProps) {
 						/>
 					}
 				/>
-				<div className="h-full pt-10">{children}</div>
+				{children}
 			</main>
 		</>
 	);
