@@ -3,6 +3,7 @@ import {
 	ChatMemoryIndicator,
 	ChatResetSession,
 } from '@/features/chat';
+import { Toaster } from '@ui/sonner';
 
 function ChatContent() {
 	return (
@@ -17,6 +18,7 @@ function ChatContent() {
 					<ChatInput />
 				</div>
 			</div>
+			<Toaster />
 		</div>
 	);
 }
