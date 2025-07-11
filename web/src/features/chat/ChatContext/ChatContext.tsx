@@ -6,7 +6,6 @@ import {
 	useReducer,
 } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { type ChatItemType, type MessageType } from '@types';
 
 import { type ChatAction, type ChatContextType, type ChatState } from './types';
 import {
@@ -18,6 +17,7 @@ import {
 	useChatSendMessage,
 	useChatUploadFiles,
 } from '../services';
+import { type ChatItemType, type MessageType } from '../types';
 
 const initialState: ChatState = {
 	chats: [],

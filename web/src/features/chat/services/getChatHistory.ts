@@ -1,6 +1,7 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
-import { type ChatType } from '@/types';
 import { axios } from '@/utils';
+
+import { type ChatType } from '../types';
 
 const getChatHistory = async (chatId: string) => {
 	const { data } = await axios.get<ChatType>(`/api/chat/${chatId}`);

@@ -1,6 +1,7 @@
 import { useMutation, type UseMutationResult } from '@tanstack/react-query';
-import { type FileUploadResponseType } from '@/types';
 import { axios } from '@/utils';
+
+import { type FileUploadResponseType } from '../types';
 
 const uploadFiles = async (files: File[]) => {
 	const formData = new FormData();
@@ -8,11 +9,15 @@ const uploadFiles = async (files: File[]) => {
 		formData.append('files', file);
 	});
 
-	const { data } = await axios.post<FileUploadResponseType>('/api/upload', formData, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
+	const { data } = await axios.post<FileUploadResponseType>(
+		'/api/upload',
+		formData,
+		{
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
 		},
-	});
+	);
 
 	return data;
 };

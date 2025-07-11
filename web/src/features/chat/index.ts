@@ -6,3 +6,4 @@ export { default as ChatResetSession } from './ChatResetSession';
 export { default as ChatSidebar } from './ChatSidebar';
 
 export * from './ChatContext';
+export * from './services';

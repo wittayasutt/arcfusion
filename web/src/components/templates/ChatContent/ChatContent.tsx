@@ -3,7 +3,7 @@ import {
 	ChatMemoryIndicator,
 	ChatMessages,
 	ChatResetSession,
-} from '@/features/chat';
+} from '@features/chat';
 
 function ChatContent() {
 	return (

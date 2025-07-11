@@ -3,12 +3,13 @@ import {
 	type UseMutationResult,
 	useQueryClient,
 } from '@tanstack/react-query';
+import { axios } from '@/utils';
+
 import {
 	type ChatSendMessageResponseType,
 	type ChatType,
 	type MessageType,
-} from '@/types';
-import { axios } from '@/utils';
+} from '../types';
 
 type sendMessageType = {
 	chatId: string;

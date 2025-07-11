@@ -1,6 +1,7 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query';
-import { type FileListType } from '@/types';
 import { axios } from '@/utils';
+
+import { type FileListType } from '../types';
 
 const getFiles = async () => {
 	const { data } = await axios.get<FileListType>('/api/files');

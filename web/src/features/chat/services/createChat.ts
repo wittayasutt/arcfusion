@@ -1,6 +1,7 @@
 import { useMutation, type UseMutationResult } from '@tanstack/react-query';
-import { type ChatCreateResponseType } from '@/types';
 import { axios } from '@/utils';
+
+import { type ChatCreateResponseType } from '../types';
 
 const createChat = async () => {
 	const { data } = await axios.post<ChatCreateResponseType>('/api/chat/create');

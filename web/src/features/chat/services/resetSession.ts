@@ -1,6 +1,7 @@
 import { useMutation, type UseMutationResult } from '@tanstack/react-query';
-import { type ChatResetResponseType } from '@/types';
 import { axios } from '@/utils';
+
+import { type ChatResetResponseType } from '../types';
 
 const resetSession = async (chatId: string) => {
 	const { data } = await axios.post<ChatResetResponseType>('/api/reset', {
