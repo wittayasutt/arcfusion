@@ -1,8 +1,18 @@
+import { useEffect, useRef } from 'react';
 import { MessageInteraction } from '@molecules';
 import { useChatContext } from '@contexts/ChatContext';
 
 function ChatMessages() {
 	const { messages } = useChatContext();
+	const messagesEndRef = useRef<HTMLDivElement>(null);
+
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+	};
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [messages]);
 
 	return (
 		<>
@@ -13,6 +23,7 @@ function ChatMessages() {
 					question={message.question}
 				/>
 			))}
+			<div ref={messagesEndRef} />
 		</>
 	);
 }
