@@ -20,6 +20,7 @@ export type ChatContextType = ChatState & {
 	setError: (error: string | null) => void;
 	setLoading: (loading: boolean) => void;
 	setMessages: (messages: MessageType[]) => void;
+	uploadFile: (files: File[]) => Promise<void>;
 };
 
 export type ChatState = {

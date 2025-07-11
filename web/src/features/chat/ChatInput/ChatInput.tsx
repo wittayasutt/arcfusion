@@ -1,4 +1,6 @@
 import { CarouselMessages } from '@molecules';
+import { Toaster } from '@ui/sonner';
+
 import { ChatInputForm } from './ChatInputForm';
 
 //  TODO: Remove this mock messages
@@ -26,6 +28,7 @@ export function ChatInput() {
 				</div>
 			) : null} */}
 			<ChatInputForm />
+			<Toaster />
 		</>
 	);
 }

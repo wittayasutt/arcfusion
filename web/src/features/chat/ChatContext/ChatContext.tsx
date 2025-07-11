@@ -15,6 +15,7 @@ import {
 	useChatGetHistory,
 	useChatResetSession,
 	useChatSendMessage,
+	useChatUploadFiles,
 } from '../services';
 
 const initialState: ChatState = {
@@ -77,6 +78,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const { data: chatHistory } = useChatGetHistory(state.currentChatId);
 	const { mutateAsync: resetSession } = useChatResetSession();
 	const { mutateAsync: sendChatMessage } = useChatSendMessage();
+	const { mutateAsync: uploadFiles } = useChatUploadFiles();
 
 	const addMessage = (message: MessageType) => {
 		dispatch({ type: 'ADD_MESSAGE', payload: message });
@@ -175,6 +177,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: 'SET_MESSAGES', payload: messages });
 	};
 
+	const uploadFile = async (files: File[]) => {
+		try {
+			setLoading(true);
+			setError(null);
+
+			await uploadFiles(files);
+		} catch (error) {
+			setError(
+				error instanceof Error ? error.message : 'Failed to upload file',
+			);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	useEffect(() => {
 		if (allChats) {
 			setChats(allChats.chats.reverse());
@@ -199,6 +216,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		setError,
 		setLoading,
 		setMessages,
+		uploadFile,
 	};
 
 	return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

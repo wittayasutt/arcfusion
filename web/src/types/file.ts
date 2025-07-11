@@ -1,3 +1,9 @@
+export type FileListType = {
+	files: FileType[];
+	total_files: number;
+	total_size_bytes: number;
+};
+
 export type FileType = {
 	filename: string;
 	size: number;
@@ -5,8 +11,7 @@ export type FileType = {
 	id: string;
 };
 
-export type FileListType = {
+export type FileUploadResponseType = {
+	message: string;
 	files: FileType[];
-	total_files: number;
-	total_size_bytes: number;
 };
