@@ -1,30 +1,23 @@
-import { PanelLeftIcon } from 'lucide-react';
 import { type ReactNode } from 'react';
 
-import { SidebarProvider, useSidebar } from '@ui/sidebar';
+import { SidebarToggle } from '@atoms';
 import { Navbar, Sidebar } from '@organisms';
+import { SidebarProvider } from '@ui/sidebar';
 
 type ChatLayoutProps = {
 	children?: ReactNode;
 };
 
 function ChatLayout({ children }: ChatLayoutProps) {
-	const { toggleSidebar } = useSidebar();
-
 	return (
 		<>
-			<Sidebar />
+			<Sidebar className="z-20" />
 			<main className="flex w-full flex-col">
 				<Navbar
-					className="sticky top-0 z-10"
-					leftLabel={
-						<PanelLeftIcon
-							className="size-5 cursor-pointer"
-							onClick={toggleSidebar}
-						/>
-					}
+					className="fixed top-0 right-0 z-10"
+					leftLabel={<SidebarToggle />}
 				/>
-				{children}
+				<div className="pt-10">{children}</div>
 			</main>
 		</>
 	);

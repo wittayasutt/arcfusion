@@ -1,7 +1,11 @@
-import { SidebarHeader as UiSidebarHeader } from '@/components/ui/sidebar';
+import { SidebarToggle } from '@atoms';
 
 function SidebarHeader() {
-	return <UiSidebarHeader className="min-h-10 border-b" />;
+	return (
+		<div className="flex min-h-10 items-center justify-end border-b">
+			<SidebarToggle />
+		</div>
+	);
 }
 
 export default SidebarHeader;

@@ -3,7 +3,11 @@ import { SquarePen } from 'lucide-react';
 import { SidebarContent, SidebarHeader } from '@molecules';
 import { Sidebar as UiSidebar } from '@ui/sidebar';
 
-function Sidebar() {
+type SidebarProps = {
+	className?: string;
+};
+
+function Sidebar({ className }: SidebarProps) {
 	const items = [
 		{
 			label:
@@ -39,7 +43,7 @@ function Sidebar() {
 	];
 
 	return (
-		<UiSidebar>
+		<UiSidebar className={className}>
 			<SidebarHeader />
 			<SidebarContent sidebarGroups={sidebarGroups} />
 		</UiSidebar>
