@@ -2,7 +2,6 @@ import { type ReactNode } from 'react';
 
 import { SidebarToggle } from '@atoms';
 import { Navbar, Sidebar } from '@organisms';
-import { useChatGetAll } from '@services';
 import { SidebarProvider } from '@ui/sidebar';
 
 type ChatLayoutProps = {
@@ -10,8 +9,6 @@ type ChatLayoutProps = {
 };
 
 function ChatLayout({ children }: ChatLayoutProps) {
-	const { data, isFetching } = useChatGetAll();
-
 	return (
 		<>
 			<Sidebar className="z-20" />

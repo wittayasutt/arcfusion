@@ -7,7 +7,11 @@ const createChat = async () => {
 	return data;
 };
 
-export const useChatCreate = (): UseMutationResult<ChatCreateResponseType> => {
+export const useChatCreate = (): UseMutationResult<
+	ChatCreateResponseType,
+	Error,
+	void
+> => {
 	return useMutation({
 		mutationFn: createChat,
 		mutationKey: ['chat', 'create'],

@@ -1,5 +1,6 @@
 import { createContext, type ReactNode, useContext, useReducer } from 'react';
 import { type MessageType } from '@/types/chat';
+import { useChatCreate, useChatSendMessage } from '@services';
 
 type ChatState = {
 	currentChatId: string | null;
@@ -60,51 +61,83 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
 }
 
 type ChatContextType = ChatState & {
-	setCurrentChatId: (chat: string) => void;
 	addMessage: (message: MessageType) => void;
-	setMessages: (messages: MessageType[]) => void;
-	setLoading: (loading: boolean) => void;
-	setError: (error: string | null) => void;
 	resetChat: () => void;
+	sendMessage: (message: string) => Promise<void>;
+	setCurrentChatId: (chat: string) => void;
+	setError: (error: string | null) => void;
+	setLoading: (loading: boolean) => void;
+	setMessages: (messages: MessageType[]) => void;
 };
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(chatReducer, initialState);
-
-	const setCurrentChatId = (chatId: string) => {
-		dispatch({ type: 'SET_CURRENT_CHAT', payload: chatId });
-	};
+	const { mutateAsync: createChat } = useChatCreate();
+	const { mutateAsync: sendChatMessage } = useChatSendMessage();
 
 	const addMessage = (message: MessageType) => {
 		dispatch({ type: 'ADD_MESSAGE', payload: message });
-	};
-
-	const setMessages = (messages: MessageType[]) => {
-		dispatch({ type: 'SET_MESSAGES', payload: messages });
-	};
-
-	const setLoading = (loading: boolean) => {
-		dispatch({ type: 'SET_LOADING', payload: loading });
-	};
-
-	const setError = (error: string | null) => {
-		dispatch({ type: 'SET_ERROR', payload: error });
 	};
 
 	const resetChat = () => {
 		dispatch({ type: 'RESET_CHAT' });
 	};
 
+	const sendMessage = async (message: string) => {
+		try {
+			setLoading(true);
+			setError(null);
+
+			if (state.currentChatId) {
+				await sendChatMessage({
+					chatId: state.currentChatId,
+					question: message.trim(),
+				});
+			} else {
+				const response = await createChat();
+				setCurrentChatId(response.chat_id);
+
+				await sendChatMessage({
+					chatId: response.chat_id,
+					question: message.trim(),
+				});
+			}
+		} catch (error) {
+			setError(
+				error instanceof Error ? error.message : 'Failed to send message',
+			);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const setCurrentChatId = (chatId: string) => {
+		dispatch({ type: 'SET_CURRENT_CHAT', payload: chatId });
+	};
+
+	const setError = (error: string | null) => {
+		dispatch({ type: 'SET_ERROR', payload: error });
+	};
+
+	const setLoading = (loading: boolean) => {
+		dispatch({ type: 'SET_LOADING', payload: loading });
+	};
+
+	const setMessages = (messages: MessageType[]) => {
+		dispatch({ type: 'SET_MESSAGES', payload: messages });
+	};
+
 	const value: ChatContextType = {
 		...state,
-		setCurrentChatId,
 		addMessage,
-		setMessages,
-		setLoading,
-		setError,
 		resetChat,
+		sendMessage,
+		setCurrentChatId,
+		setError,
+		setLoading,
+		setMessages,
 	};
 
 	return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

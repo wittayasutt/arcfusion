@@ -1,22 +1,19 @@
 import { CircleCheckBig, LoaderCircle } from 'lucide-react';
+import { useChatContext } from '@contexts/ChatContext';
 
-import { type MemoryStatusType } from './types';
+function ChatMemoryIndicator() {
+	const { currentChatId, isLoading } = useChatContext();
 
-type ChatMemoryIndicatorProps = {
-	status?: MemoryStatusType;
-};
-
-function ChatMemoryIndicator({ status = 'idle' }: ChatMemoryIndicatorProps) {
 	const className = 'text-muted-foreground text-sm flex items-center gap-1';
 
-	if (status === 'memorizing') {
+	if (currentChatId && isLoading) {
 		return (
 			<p className={className}>
 				<LoaderCircle className="size-4 animate-spin" />
 				Memorizing...
 			</p>
 		);
-	} else if (status === 'memorized') {
+	} else if (currentChatId && !isLoading) {
 		return (
 			<p className={className}>
 				<CircleCheckBig className="size-4" />
