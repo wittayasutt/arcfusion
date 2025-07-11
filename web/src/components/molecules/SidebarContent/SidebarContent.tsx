@@ -11,15 +11,15 @@ import { SidebarMenuButton } from '@atoms';
 import { type SidebarGroupType } from './types';
 
 type SidebarContentProps = {
-	sidebarGroups: SidebarGroupType[];
+	sidebarGroups?: SidebarGroupType[];
 };
 
 function SidebarContent({ sidebarGroups }: SidebarContentProps) {
 	return (
 		<UiSidebarContent>
-			{sidebarGroups.length > 0 ? (
+			{sidebarGroups && sidebarGroups?.length > 0 ? (
 				<SidebarGroup>
-					{sidebarGroups.map((sidebarGroup, index) => (
+					{sidebarGroups?.map((sidebarGroup, index) => (
 						<div className="mb-2" key={index}>
 							{sidebarGroup?.title ? (
 								<SidebarGroupLabel>{sidebarGroup?.title}</SidebarGroupLabel>

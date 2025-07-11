@@ -1,7 +1,8 @@
 import { type ReactNode } from 'react';
 
 import { SidebarToggle } from '@atoms';
-import { Navbar, Sidebar } from '@organisms';
+import { Navbar } from '@organisms';
+import { ChatSidebar } from '@features/chat';
 import { SidebarProvider } from '@ui/sidebar';
 
 type ChatLayoutProps = {
@@ -11,7 +12,7 @@ type ChatLayoutProps = {
 function ChatLayout({ children }: ChatLayoutProps) {
 	return (
 		<>
-			<Sidebar className="z-20" />
+			<ChatSidebar className="z-20" />
 			<main className="flex w-full flex-col">
 				<Navbar
 					className="fixed top-0 right-0 z-10"
