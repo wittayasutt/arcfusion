@@ -16,6 +16,12 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 	const isMobile = useIsMobile();
 	const { toggleSidebar } = useSidebar();
 
+	const handleMobileToggleSidebar = () => {
+		if (isMobile) {
+			toggleSidebar();
+		}
+	};
+
 	const sidebarGroups: SidebarGroupType[] = [
 		{
 			items: [
@@ -25,6 +31,7 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 					label: 'New chat',
 					onClick: () => {
 						newChat();
+						handleMobileToggleSidebar();
 					},
 				},
 			],
@@ -37,10 +44,7 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 				label: chat.first_question,
 				onClick: () => {
 					selectChat(chat.chat_id);
-
-					if (isMobile) {
-						toggleSidebar();
-					}
+					handleMobileToggleSidebar();
 				},
 				onClickRemove: () => {
 					removeChat(chat.chat_id);
