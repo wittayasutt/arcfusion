@@ -1,31 +1,20 @@
 import { SquarePen } from 'lucide-react';
 import { Sidebar } from '@organisms';
 
+import { useChatContext } from '../ChatContext';
+
 type ChatSidebarProps = {
 	className?: string;
 };
 
 function ChatSidebar({ className }: ChatSidebarProps) {
-	const items = [
-		{
-			label:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis culpa quam nobis iste quasi a quae eum commodi quos magni quo reprehenderit dolorem cum quis, et ullam, fugit asperiores quisquam.',
-			onClickRemove: () => {
-				// TODO: Implement remove chat
-			},
-		},
-		{
-			label: 'Inbox',
-			onClickRemove: () => {
-				// TODO: Implement remove chat
-			},
-		},
-	];
+	const { chats } = useChatContext();
 
 	const sidebarGroups = [
 		{
 			items: [
 				{
+					id: 'new-chat',
 					icon: <SquarePen />,
 					label: 'New chat',
 					onClick: () => {
@@ -36,7 +25,13 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 		},
 		{
 			title: 'Chats',
-			items,
+			items: chats.map((chat) => ({
+				id: chat.chat_id,
+				label: chat.first_question,
+				onClickRemove: () => {
+					// TODO: Implement chat
+				},
+			})),
 		},
 	];
 

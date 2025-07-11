@@ -26,8 +26,8 @@ function SidebarContent({ sidebarGroups }: SidebarContentProps) {
 							) : null}
 							<SidebarGroupContent>
 								<SidebarMenu>
-									{sidebarGroup?.items?.map((sidebarGroupItem, itemIndex) => (
-										<SidebarMenuItem key={itemIndex}>
+									{sidebarGroup?.items?.map((sidebarGroupItem) => (
+										<SidebarMenuItem key={sidebarGroupItem.id}>
 											<SidebarMenuButton {...sidebarGroupItem} />
 										</SidebarMenuItem>
 									))}

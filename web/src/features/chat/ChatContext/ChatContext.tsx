@@ -6,17 +6,19 @@ import {
 	useReducer,
 } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { type MessageType } from '@types';
+import { type ChatItemType, type MessageType } from '@types';
 
 import { type ChatAction, type ChatContextType, type ChatState } from './types';
 import {
 	useChatCreate,
+	useChatGetAll,
 	useChatGetHistory,
 	useChatResetSession,
 	useChatSendMessage,
 } from '../services';
 
 const initialState: ChatState = {
+	chats: [],
 	currentChatId: null,
 	messages: [],
 	isLoading: false,
@@ -34,6 +36,11 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
 			return {
 				...state,
 				messages: [...state.messages, action.payload],
+			};
+		case 'SET_CHATS':
+			return {
+				...state,
+				chats: action.payload,
 			};
 		case 'SET_MESSAGES':
 			return {
@@ -66,6 +73,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
 	const queryClient = useQueryClient();
 	const { mutateAsync: createChat } = useChatCreate();
+	const { data: allChats } = useChatGetAll();
 	const { data: chatHistory } = useChatGetHistory(state.currentChatId);
 	const { mutateAsync: resetSession } = useChatResetSession();
 	const { mutateAsync: sendChatMessage } = useChatSendMessage();
@@ -118,6 +126,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		}
 	};
 
+	const setChats = (chats: ChatItemType[]) => {
+		dispatch({ type: 'SET_CHATS', payload: chats });
+	};
+
 	const setCurrentChatId = (chatId: string) => {
 		dispatch({ type: 'SET_CURRENT_CHAT', payload: chatId });
 	};
@@ -133,6 +145,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const setMessages = (messages: MessageType[]) => {
 		dispatch({ type: 'SET_MESSAGES', payload: messages });
 	};
+
+	useEffect(() => {
+		if (allChats) {
+			setChats(allChats.chats);
+		}
+	}, [allChats]);
 
 	useEffect(() => {
 		if (chatHistory?.messages) {
