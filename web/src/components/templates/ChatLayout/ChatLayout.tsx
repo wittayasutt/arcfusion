@@ -17,7 +17,7 @@ function ChatLayout({ children }: ChatLayoutProps) {
 					className="fixed top-0 right-0 z-10"
 					leftLabel={<SidebarToggle />}
 				/>
-				<div className="pt-10">{children}</div>
+				<div className="h-full pt-10">{children}</div>
 			</main>
 		</>
 	);

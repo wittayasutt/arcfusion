@@ -1,6 +1,17 @@
-import { createContext, type ReactNode, useContext, useReducer } from 'react';
+import {
+	createContext,
+	type ReactNode,
+	useContext,
+	useEffect,
+	useReducer,
+} from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { type MessageType } from '@/types/chat';
-import { useChatCreate, useChatSendMessage } from '@services';
+import {
+	useChatCreate,
+	useChatGetHistory,
+	useChatSendMessage,
+} from '@services';
 
 type ChatState = {
 	currentChatId: string | null;
@@ -74,7 +85,10 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export function ChatProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(chatReducer, initialState);
+
+	const queryClient = useQueryClient();
 	const { mutateAsync: createChat } = useChatCreate();
+	const { data: chatHistory } = useChatGetHistory(state.currentChatId);
 	const { mutateAsync: sendChatMessage } = useChatSendMessage();
 
 	const addMessage = (message: MessageType) => {
@@ -90,20 +104,25 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 			setLoading(true);
 			setError(null);
 
-			if (state.currentChatId) {
+			let chatId = state.currentChatId;
+
+			if (chatId) {
 				await sendChatMessage({
-					chatId: state.currentChatId,
+					chatId,
 					question: message.trim(),
 				});
 			} else {
 				const response = await createChat();
-				setCurrentChatId(response.chat_id);
+				chatId = response.chat_id;
+				setCurrentChatId(chatId);
 
 				await sendChatMessage({
-					chatId: response.chat_id,
+					chatId,
 					question: message.trim(),
 				});
 			}
+
+			await queryClient.invalidateQueries({ queryKey: ['chat', chatId] });
 		} catch (error) {
 			setError(
 				error instanceof Error ? error.message : 'Failed to send message',
@@ -128,6 +147,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const setMessages = (messages: MessageType[]) => {
 		dispatch({ type: 'SET_MESSAGES', payload: messages });
 	};
+
+	useEffect(() => {
+		if (chatHistory?.messages) {
+			setMessages(chatHistory.messages);
+		}
+	}, [chatHistory]);
 
 	const value: ChatContextType = {
 		...state,
