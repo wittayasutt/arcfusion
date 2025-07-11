@@ -26,8 +26,9 @@ export function ChatInputForm() {
 		}
 
 		try {
-			await sendMessage(data.message.trim());
+			const sendingMessage = data.message.trim();
 			form.reset({ message: '' });
+			await sendMessage(sendingMessage);
 		} catch (error) {
 			console.error('Error submitting message:', error);
 		}
