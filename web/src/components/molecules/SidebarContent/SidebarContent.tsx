@@ -28,7 +28,12 @@ function SidebarContent({ sidebarGroups }: SidebarContentProps) {
 								<SidebarMenu>
 									{sidebarGroup?.items?.map((sidebarGroupItem) => (
 										<SidebarMenuItem key={sidebarGroupItem.id}>
-											<SidebarMenuButton {...sidebarGroupItem} />
+											<SidebarMenuButton
+												isActive={
+													sidebarGroup.activeItemId === sidebarGroupItem.id
+												}
+												{...sidebarGroupItem}
+											/>
 										</SidebarMenuItem>
 									))}
 								</SidebarMenu>

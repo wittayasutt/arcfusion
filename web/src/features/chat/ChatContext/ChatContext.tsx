@@ -87,15 +87,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
 		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
 		dispatch({ type: 'RESET_CHAT' });
-
-		try {
-			const response = await createChat();
-			setCurrentChatId(response.chat_id);
-		} catch (error) {
-			setError(
-				error instanceof Error ? error.message : 'Failed to create a new chat',
-			);
-		}
 	};
 
 	const removeChat = async (chatId: string) => {
@@ -106,6 +97,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 			setError(
 				error instanceof Error ? error.message : 'Failed to remove chat',
 			);
+		}
+
+		if (chatId === state.currentChatId) {
+			dispatch({ type: 'RESET_CHAT' });
 		}
 	};
 

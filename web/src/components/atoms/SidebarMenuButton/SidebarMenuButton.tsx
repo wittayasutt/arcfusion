@@ -6,9 +6,12 @@ import { SidebarMenuButton as UiSidebarMenuButton } from '@ui/sidebar';
 
 import { type SidebarItemType } from './types';
 
-type SidebarMenuButtonProps = SidebarItemType;
+type SidebarMenuButtonProps = SidebarItemType & {
+	isActive?: boolean;
+};
 
 function SidebarMenuButton({
+	isActive,
 	icon,
 	label,
 	onClick,
@@ -19,6 +22,7 @@ function SidebarMenuButton({
 	return (
 		<UiSidebarMenuButton
 			className="cursor-pointer"
+			isActive={isActive}
 			onClick={onClick}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}

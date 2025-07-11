@@ -1,4 +1,5 @@
 import { SquarePen } from 'lucide-react';
+import { type SidebarGroupType } from '@molecules';
 import { Sidebar } from '@organisms';
 
 import { useChatContext } from '../ChatContext';
@@ -8,9 +9,10 @@ type ChatSidebarProps = {
 };
 
 function ChatSidebar({ className }: ChatSidebarProps) {
-	const { chats, newChat, removeChat, selectChat } = useChatContext();
+	const { chats, currentChatId, newChat, removeChat, selectChat } =
+		useChatContext();
 
-	const sidebarGroups = [
+	const sidebarGroups: SidebarGroupType[] = [
 		{
 			items: [
 				{
@@ -24,6 +26,7 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 			],
 		},
 		{
+			activeItemId: currentChatId,
 			title: 'Chats',
 			items: chats.map((chat) => ({
 				id: chat.chat_id,
