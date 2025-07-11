@@ -10,6 +10,7 @@ import { type MessageType } from '@/types/chat';
 import {
 	useChatCreate,
 	useChatGetHistory,
+	useChatResetSession,
 	useChatSendMessage,
 } from '@services';
 
@@ -89,14 +90,22 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const queryClient = useQueryClient();
 	const { mutateAsync: createChat } = useChatCreate();
 	const { data: chatHistory } = useChatGetHistory(state.currentChatId);
+	const { mutateAsync: resetSession } = useChatResetSession();
 	const { mutateAsync: sendChatMessage } = useChatSendMessage();
 
 	const addMessage = (message: MessageType) => {
 		dispatch({ type: 'ADD_MESSAGE', payload: message });
 	};
 
-	const resetChat = () => {
-		dispatch({ type: 'RESET_CHAT' });
+	const resetChat = async () => {
+		if (!state.currentChatId) return;
+
+		try {
+			await resetSession(state.currentChatId);
+			dispatch({ type: 'RESET_CHAT' });
+		} catch (error) {
+			setError(error instanceof Error ? error.message : 'Failed to reset chat');
+		}
 	};
 
 	const sendMessage = async (message: string) => {

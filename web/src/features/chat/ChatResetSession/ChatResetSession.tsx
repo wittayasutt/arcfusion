@@ -1,25 +1,15 @@
 import clsx from 'clsx';
-
 import { useChatContext } from '@contexts/ChatContext';
-import { useChatResetSession } from '@services';
 
 type ChatResetSessionProps = {
 	className?: string;
 };
 
 function ChatResetSession({ className }: ChatResetSessionProps) {
-	const { currentChatId } = useChatContext();
-	const { mutate: resetSession, isPending } = useChatResetSession();
+	const { currentChatId, resetChat } = useChatContext();
 
 	const handleResetSession = () => {
-		if (!currentChatId) return;
-
-		try {
-			resetSession(currentChatId);
-			// setCurrentChatId(null);
-		} catch (error) {
-			console.error(error);
-		}
+		resetChat();
 	};
 
 	if (!!currentChatId) {
