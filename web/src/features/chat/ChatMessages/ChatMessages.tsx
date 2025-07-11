@@ -14,6 +14,16 @@ function ChatMessages() {
 		scrollToBottom();
 	}, [messages]);
 
+	if (!messages?.length) {
+		return (
+			<div className="flex h-full items-center justify-center">
+				<h2 className="text-muted-foreground">
+					Just upload your PDF, and feel free to ask me anything!
+				</h2>
+			</div>
+		);
+	}
+
 	return (
 		<>
 			{messages.map((message) => (
