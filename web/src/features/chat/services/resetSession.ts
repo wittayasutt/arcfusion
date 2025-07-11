@@ -1,4 +1,8 @@
-import { useMutation, type UseMutationResult } from '@tanstack/react-query';
+import {
+	useMutation,
+	type UseMutationResult,
+	useQueryClient,
+} from '@tanstack/react-query';
 import { axios } from '@/utils';
 
 import { type ChatResetResponseType } from '../types';
@@ -16,8 +20,13 @@ export const useChatResetSession = (): UseMutationResult<
 	Error,
 	string
 > => {
+	const queryClient = useQueryClient();
+
 	return useMutation({
 		mutationFn: resetSession,
 		mutationKey: ['chat', 'reset'],
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
+		},
 	});
 };

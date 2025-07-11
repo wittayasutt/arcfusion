@@ -17,8 +17,8 @@ type sendMessageType = {
 };
 
 const sendMessage = async ({ chatId, question }: sendMessageType) => {
-	// Add 3-second delay for testing purposes
-	await new Promise((resolve) => setTimeout(resolve, 3000));
+	// Add 2-second delay for testing purposes
+	await new Promise((resolve) => setTimeout(resolve, 2000));
 
 	const { data } = await axios.post<ChatSendMessageResponseType>('/api/chat', {
 		chat_id: chatId,

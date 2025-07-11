@@ -103,7 +103,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const removeChat = async (chatId: string) => {
 		try {
 			await resetSession(chatId);
-			await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
 		} catch (error) {
 			setError(
 				error instanceof Error ? error.message : 'Failed to remove chat',
@@ -124,8 +123,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		} catch (error) {
 			setError(error instanceof Error ? error.message : 'Failed to reset chat');
 		}
-
-		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
 	};
 
 	const selectChat = async (chatId: string) => {
@@ -155,8 +152,6 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 					question: message.trim(),
 				});
 			}
-
-			await queryClient.invalidateQueries({ queryKey: ['chat', chatId] });
 		} catch (error) {
 			setError(
 				error instanceof Error ? error.message : 'Failed to send message',

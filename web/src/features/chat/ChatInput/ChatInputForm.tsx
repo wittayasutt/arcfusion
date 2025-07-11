@@ -39,15 +39,18 @@ export function ChatInputForm() {
 		if (!data.message) return;
 
 		try {
-			await sendMessage(data.message);
+			const message = data.message;
 			form.reset({ message: '' });
+			await sendMessage(message);
 		} catch (error) {
 			console.error('Error submitting message:', error);
 		}
 	};
 
 	const onSubmit = (data: z.infer<typeof FormSchema>) => {
-		if (data.files?.length && data.files.length > 0) {
+		if (isLoading) {
+			return;
+		} else if (data.files?.length && data.files.length > 0) {
 			handleSubmitFiles(data);
 		} else if (data.message?.trim()) {
 			console.log('data.message?.trim()', data.message?.trim());
@@ -106,6 +109,7 @@ export function ChatInputForm() {
 						variant="outline"
 						size="sm"
 						type="button"
+						disabled={isLoading}
 						onClick={handleFileUpload}
 					>
 						<FileUp /> Upload PDFs

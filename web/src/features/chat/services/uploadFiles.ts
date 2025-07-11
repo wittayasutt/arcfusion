@@ -1,4 +1,8 @@
-import { useMutation, type UseMutationResult } from '@tanstack/react-query';
+import {
+	useMutation,
+	type UseMutationResult,
+	useQueryClient,
+} from '@tanstack/react-query';
 import { axios } from '@/utils';
 
 import { type FileUploadResponseType } from '../types';
@@ -27,8 +31,13 @@ export const useChatUploadFiles = (): UseMutationResult<
 	Error,
 	File[]
 > => {
+	const queryClient = useQueryClient();
+
 	return useMutation({
 		mutationFn: uploadFiles,
 		mutationKey: ['chat', 'uploadFiles'],
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['chat', 'getFiles'] });
+		},
 	});
 };
