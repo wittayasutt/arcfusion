@@ -1,10 +1,13 @@
 import { ChatContent, ChatLayout } from '@components';
+import { ChatProvider } from '@contexts/ChatContext';
 
 function App() {
 	return (
-		<ChatLayout>
-			<ChatContent />
-		</ChatLayout>
+		<ChatProvider>
+			<ChatLayout>
+				<ChatContent />
+			</ChatLayout>
+		</ChatProvider>
 	);
 }
 

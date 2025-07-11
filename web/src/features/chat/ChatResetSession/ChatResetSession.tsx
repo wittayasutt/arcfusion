@@ -1,24 +1,35 @@
 import clsx from 'clsx';
 
+import { useChatContext } from '@contexts/ChatContext';
+import { useChatResetSession } from '@services';
+
 type ChatResetSessionProps = {
 	className?: string;
-	noSession?: boolean;
-	onClick?: () => void;
 };
 
-function ChatResetSession({
-	className,
-	noSession = true,
-	onClick,
-}: ChatResetSessionProps) {
-	if (!noSession) {
+function ChatResetSession({ className }: ChatResetSessionProps) {
+	const { currentChatId } = useChatContext();
+	const { mutate: resetSession, isPending } = useChatResetSession();
+
+	const handleResetSession = () => {
+		if (!currentChatId) return;
+
+		try {
+			resetSession(currentChatId);
+			// setCurrentChatId(null);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	if (!!currentChatId) {
 		return (
 			<p
 				className={clsx(
 					'text-muted-foreground hover:text-primary cursor-pointer text-sm transition-colors',
 					className,
 				)}
-				onClick={onClick}
+				onClick={handleResetSession}
 			>
 				Reset
 			</p>

@@ -9,7 +9,7 @@ const getAllChats = async () => {
 
 export const useChatGetAll = (): UseQueryResult<ChatListType> => {
 	return useQuery({
-		queryFn: () => getAllChats(),
+		queryFn: getAllChats,
 		queryKey: ['chat', 'getAll'],
 	});
 };

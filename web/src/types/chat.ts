@@ -1,9 +1,3 @@
-export type ChatType = {
-	chat_id: string;
-	messages: MessageType[];
-	message_count: number;
-};
-
 export type ChatCreateResponseType = {
 	chat_id: string;
 	message: string;
@@ -20,6 +14,26 @@ export type ChatListType = {
 	chats: ChatItemType[];
 	total_sessions: number;
 	total_messages: number;
+};
+
+export type ChatSendMessageResponseType = {
+	answer: string;
+	chat_id: string;
+	id: string;
+	source: string;
+	timestamp: Date;
+};
+
+export type ChatResetResponseType = {
+	chat_id: string;
+	message: string;
+	session_id: string;
+};
+
+export type ChatType = {
+	chat_id: string;
+	messages: MessageType[];
+	message_count: number;
 };
 
 export type MessageType = {
