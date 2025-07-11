@@ -3,8 +3,15 @@ import { type FileUploadResponseType } from '@/types';
 import { axios } from '@/utils';
 
 const uploadFiles = async (files: File[]) => {
-	const { data } = await axios.post<FileUploadResponseType>('/api/upload', {
-		files,
+	const formData = new FormData();
+	files.forEach((file) => {
+		formData.append('files', file);
+	});
+
+	const { data } = await axios.post<FileUploadResponseType>('/api/upload', formData, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
 	});
 
 	return data;

@@ -47,9 +47,10 @@ export function ChatInputForm() {
 	};
 
 	const onSubmit = (data: z.infer<typeof FormSchema>) => {
-		if (data.files) {
+		if (data.files?.length && data.files.length > 0) {
 			handleSubmitFiles(data);
 		} else if (data.message?.trim()) {
+			console.log('data.message?.trim()', data.message?.trim());
 			handleSubmitMessage(data);
 		}
 	};
