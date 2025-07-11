@@ -5,8 +5,11 @@ import {
 	ChatResetSession,
 } from '@/features/chat';
 import { Toaster } from '@ui/sonner';
+import { useChatCreate } from '@services';
 
 function ChatContent() {
+	const { data, isFetching } = useChatCreate();
+
 	return (
 		<div className="relative h-full">
 			<div className="mx-auto flex h-full max-w-2xl flex-col px-4">

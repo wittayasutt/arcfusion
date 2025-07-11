@@ -43,7 +43,9 @@
 			"@hooks/*": ["src/hooks/*"],
 			"@pages/*": ["src/pages/*"],
 			"@stores": ["src/stores"],
-			"@types": ["src/types"]
+			"@services": ["src/services"],
+			"@types": ["src/types"],
+			"@utils": ["src/utils"]
 		}
 	},
 	"include": ["src"]

@@ -4,6 +4,11 @@ export type ChatType = {
 	message_count: number;
 };
 
+export type ChatCreateResponseType = {
+	chat_id: string;
+	message: string;
+};
+
 export type ChatItemType = {
 	chat_id: string;
 	message_count: number;
