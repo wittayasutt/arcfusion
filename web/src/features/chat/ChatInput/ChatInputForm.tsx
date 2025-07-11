@@ -53,7 +53,6 @@ export function ChatInputForm() {
 		} else if (data.files?.length && data.files.length > 0) {
 			handleSubmitFiles(data);
 		} else if (data.message?.trim()) {
-			console.log('data.message?.trim()', data.message?.trim());
 			handleSubmitMessage(data);
 		}
 	};
