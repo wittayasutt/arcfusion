@@ -8,7 +8,7 @@ type ChatSidebarProps = {
 };
 
 function ChatSidebar({ className }: ChatSidebarProps) {
-	const { chats, newChat, removeChat } = useChatContext();
+	const { chats, newChat, removeChat, selectChat } = useChatContext();
 
 	const sidebarGroups = [
 		{
@@ -28,6 +28,9 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 			items: chats.map((chat) => ({
 				id: chat.chat_id,
 				label: chat.first_question,
+				onClick: () => {
+					selectChat(chat.chat_id);
+				},
 				onClickRemove: () => {
 					removeChat(chat.chat_id);
 				},

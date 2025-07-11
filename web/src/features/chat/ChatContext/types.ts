@@ -14,6 +14,7 @@ export type ChatContextType = ChatState & {
 	newChat: () => Promise<void>;
 	removeChat: (chatId: string) => Promise<void>;
 	resetChat: () => void;
+	selectChat: (chatId: string) => void;
 	sendMessage: (message: string) => Promise<void>;
 	setCurrentChatId: (chat: string) => void;
 	setError: (error: string | null) => void;

@@ -122,6 +122,11 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
 	};
 
+	const selectChat = async (chatId: string) => {
+		dispatch({ type: 'SET_CURRENT_CHAT', payload: chatId });
+		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
+	};
+
 	const sendMessage = async (message: string) => {
 		try {
 			setLoading(true);
@@ -193,6 +198,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		newChat,
 		removeChat,
 		resetChat,
+		selectChat,
 		sendMessage,
 		setCurrentChatId,
 		setError,
