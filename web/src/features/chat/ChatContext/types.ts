@@ -1,12 +1,13 @@
-import { type ChatItemType, type MessageType } from '@types';
+import { type ChatItemType, type FileType, type MessageType } from '@types';
 
 export type ChatAction =
-	| { type: 'SET_CURRENT_CHAT'; payload: string }
 	| { type: 'ADD_MESSAGE'; payload: MessageType }
-	| { type: 'SET_MESSAGES'; payload: MessageType[] }
 	| { type: 'SET_CHATS'; payload: ChatItemType[] }
-	| { type: 'SET_LOADING'; payload: boolean }
+	| { type: 'SET_CURRENT_CHAT'; payload: string }
 	| { type: 'SET_ERROR'; payload: string | null }
+	| { type: 'SET_FILES'; payload: FileType[] }
+	| { type: 'SET_LOADING'; payload: boolean }
+	| { type: 'SET_MESSAGES'; payload: MessageType[] }
 	| { type: 'RESET_CHAT' };
 
 export type ChatContextType = ChatState & {
@@ -26,6 +27,7 @@ export type ChatContextType = ChatState & {
 export type ChatState = {
 	chats: ChatItemType[];
 	currentChatId: string | null;
+	files: FileType[];
 	messages: MessageType[];
 	isLoading: boolean;
 	error: string | null;

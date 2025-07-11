@@ -12,6 +12,7 @@ import { type ChatAction, type ChatContextType, type ChatState } from './types';
 import {
 	useChatCreate,
 	useChatGetAll,
+	useChatGetFiles,
 	useChatGetHistory,
 	useChatResetSession,
 	useChatSendMessage,
@@ -22,17 +23,13 @@ const initialState: ChatState = {
 	chats: [],
 	currentChatId: null,
 	messages: [],
+	files: [],
 	isLoading: false,
 	error: null,
 };
 
 function chatReducer(state: ChatState, action: ChatAction): ChatState {
 	switch (action.type) {
-		case 'SET_CURRENT_CHAT':
-			return {
-				...state,
-				currentChatId: action.payload,
-			};
 		case 'ADD_MESSAGE':
 			return {
 				...state,
@@ -43,24 +40,35 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
 				...state,
 				chats: action.payload,
 			};
-		case 'SET_MESSAGES':
+		case 'SET_CURRENT_CHAT':
 			return {
 				...state,
-				messages: action.payload,
-			};
-		case 'SET_LOADING':
-			return {
-				...state,
-				isLoading: action.payload,
+				currentChatId: action.payload,
 			};
 		case 'SET_ERROR':
 			return {
 				...state,
 				error: action.payload,
 			};
+		case 'SET_FILES':
+			return {
+				...state,
+				files: action.payload,
+			};
+		case 'SET_LOADING':
+			return {
+				...state,
+				isLoading: action.payload,
+			};
+		case 'SET_MESSAGES':
+			return {
+				...state,
+				messages: action.payload,
+			};
 		case 'RESET_CHAT':
 			return {
 				...initialState,
+				files: state.files,
 			};
 		default:
 			return state;
@@ -75,6 +83,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const queryClient = useQueryClient();
 	const { mutateAsync: createChat } = useChatCreate();
 	const { data: allChats } = useChatGetAll();
+	const { data: fileList } = useChatGetFiles();
 	const { data: chatHistory } = useChatGetHistory(state.currentChatId);
 	const { mutateAsync: resetSession } = useChatResetSession();
 	const { mutateAsync: sendChatMessage } = useChatSendMessage();
@@ -169,6 +178,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: 'SET_ERROR', payload: error });
 	};
 
+	const setFiles = (files: FileType[]) => {
+		dispatch({ type: 'SET_FILES', payload: files });
+	};
+
 	const setLoading = (loading: boolean) => {
 		dispatch({ type: 'SET_LOADING', payload: loading });
 	};
@@ -203,6 +216,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 			setMessages(chatHistory.messages);
 		}
 	}, [chatHistory]);
+
+	useEffect(() => {
+		if (fileList) {
+			setFiles(fileList.files);
+		}
+	}, [fileList]);
 
 	const value: ChatContextType = {
 		...state,
