@@ -11,6 +11,7 @@ export type ChatAction =
 
 export type ChatContextType = ChatState & {
 	addMessage: (message: MessageType) => void;
+	newChat: () => Promise<void>;
 	removeChat: (chatId: string) => Promise<void>;
 	resetChat: () => void;
 	sendMessage: (message: string) => Promise<void>;

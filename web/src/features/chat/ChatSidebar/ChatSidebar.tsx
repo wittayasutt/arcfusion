@@ -8,7 +8,7 @@ type ChatSidebarProps = {
 };
 
 function ChatSidebar({ className }: ChatSidebarProps) {
-	const { chats, removeChat } = useChatContext();
+	const { chats, newChat, removeChat } = useChatContext();
 
 	const sidebarGroups = [
 		{
@@ -18,7 +18,7 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 					icon: <SquarePen />,
 					label: 'New chat',
 					onClick: () => {
-						// TODO: Implement new chat
+						newChat();
 					},
 				},
 			],

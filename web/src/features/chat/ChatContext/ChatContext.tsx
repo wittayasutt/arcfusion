@@ -82,6 +82,22 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: 'ADD_MESSAGE', payload: message });
 	};
 
+	const newChat = async () => {
+		if (!state.currentChatId || state.messages.length <= 0) return;
+
+		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
+		dispatch({ type: 'RESET_CHAT' });
+
+		try {
+			const response = await createChat();
+			setCurrentChatId(response.chat_id);
+		} catch (error) {
+			setError(
+				error instanceof Error ? error.message : 'Failed to create a new chat',
+			);
+		}
+	};
+
 	const removeChat = async (chatId: string) => {
 		try {
 			await resetSession(chatId);
@@ -102,6 +118,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		} catch (error) {
 			setError(error instanceof Error ? error.message : 'Failed to reset chat');
 		}
+
+		await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
 	};
 
 	const sendMessage = async (message: string) => {
@@ -172,6 +190,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const value: ChatContextType = {
 		...state,
 		addMessage,
+		newChat,
 		removeChat,
 		resetChat,
 		sendMessage,
