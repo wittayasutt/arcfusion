@@ -82,6 +82,17 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 		dispatch({ type: 'ADD_MESSAGE', payload: message });
 	};
 
+	const removeChat = async (chatId: string) => {
+		try {
+			await resetSession(chatId);
+			await queryClient.invalidateQueries({ queryKey: ['chat', 'getAll'] });
+		} catch (error) {
+			setError(
+				error instanceof Error ? error.message : 'Failed to remove chat',
+			);
+		}
+	};
+
 	const resetChat = async () => {
 		if (!state.currentChatId) return;
 
@@ -148,7 +159,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
 	useEffect(() => {
 		if (allChats) {
-			setChats(allChats.chats);
+			setChats(allChats.chats.reverse());
 		}
 	}, [allChats]);
 
@@ -161,6 +172,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 	const value: ChatContextType = {
 		...state,
 		addMessage,
+		removeChat,
 		resetChat,
 		sendMessage,
 		setCurrentChatId,

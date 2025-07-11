@@ -8,7 +8,7 @@ type ChatSidebarProps = {
 };
 
 function ChatSidebar({ className }: ChatSidebarProps) {
-	const { chats } = useChatContext();
+	const { chats, removeChat } = useChatContext();
 
 	const sidebarGroups = [
 		{
@@ -29,7 +29,7 @@ function ChatSidebar({ className }: ChatSidebarProps) {
 				id: chat.chat_id,
 				label: chat.first_question,
 				onClickRemove: () => {
-					// TODO: Implement chat
+					removeChat(chat.chat_id);
 				},
 			})),
 		},
