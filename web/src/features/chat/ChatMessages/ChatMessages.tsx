@@ -18,7 +18,7 @@ function ChatMessages() {
 	if (!messages?.length) {
 		return (
 			<div className="flex h-full items-center justify-center">
-				<h2 className="text-muted-foreground">
+				<h2 className="text-muted-foreground max-w-8/12 text-center">
 					Just upload your PDF, and feel free to ask me anything!
 				</h2>
 			</div>
