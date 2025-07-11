@@ -2,11 +2,12 @@ import { FileUp, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useChatContext } from '@contexts/ChatContext';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
 import { Textarea } from '@ui/textarea';
+
+import { useChatContext } from '../ChatContext';
 
 const FormSchema = z.object({
 	message: z.string().optional(),

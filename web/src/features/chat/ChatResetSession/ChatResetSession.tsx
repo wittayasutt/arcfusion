@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { useChatContext } from '@contexts/ChatContext';
+
+import { useChatContext } from '../ChatContext';
 
 type ChatResetSessionProps = {
 	className?: string;

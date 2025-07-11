@@ -6,28 +6,15 @@ import {
 	useReducer,
 } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { type MessageType } from '@/types/chat';
+import { type MessageType } from '@types';
+
+import { type ChatAction, type ChatContextType, type ChatState } from './types';
 import {
 	useChatCreate,
 	useChatGetHistory,
 	useChatResetSession,
 	useChatSendMessage,
-} from '@services';
-
-type ChatState = {
-	currentChatId: string | null;
-	messages: MessageType[];
-	isLoading: boolean;
-	error: string | null;
-};
-
-type ChatAction =
-	| { type: 'SET_CURRENT_CHAT'; payload: string }
-	| { type: 'ADD_MESSAGE'; payload: MessageType }
-	| { type: 'SET_MESSAGES'; payload: MessageType[] }
-	| { type: 'SET_LOADING'; payload: boolean }
-	| { type: 'SET_ERROR'; payload: string | null }
-	| { type: 'RESET_CHAT' };
+} from '../services';
 
 const initialState: ChatState = {
 	currentChatId: null,
@@ -71,16 +58,6 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
 			return state;
 	}
 }
-
-type ChatContextType = ChatState & {
-	addMessage: (message: MessageType) => void;
-	resetChat: () => void;
-	sendMessage: (message: string) => Promise<void>;
-	setCurrentChatId: (chat: string) => void;
-	setError: (error: string | null) => void;
-	setLoading: (loading: boolean) => void;
-	setMessages: (messages: MessageType[]) => void;
-};
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 

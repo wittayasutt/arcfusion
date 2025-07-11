@@ -39,12 +39,10 @@
 			"@templates": ["src/components/templates"],
 			"@templates/*": ["src/components/templates/*"],
 			"@ui/*": ["src/components/ui/*"],
-			"@contexts/*": ["src/contexts/*"],
 			"@features/*": ["src/features/*"],
 			"@hooks/*": ["src/hooks/*"],
 			"@pages/*": ["src/pages/*"],
 			"@stores": ["src/stores"],
-			"@services": ["src/services"],
 			"@types": ["src/types"],
 			"@utils": ["src/utils"]
 		}

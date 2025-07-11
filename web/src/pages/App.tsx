@@ -1,5 +1,5 @@
 import { ChatContent, ChatLayout } from '@components';
-import { ChatProvider } from '@contexts/ChatContext';
+import { ChatProvider } from '@features/chat/ChatContext';
 
 function App() {
 	return (

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { MessageInteraction } from '@molecules';
-import { useChatContext } from '@contexts/ChatContext';
+
+import { useChatContext } from '../ChatContext';
 
 function ChatMessages() {
 	const { messages } = useChatContext();

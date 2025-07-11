@@ -1,5 +1,6 @@
 import { CircleCheckBig, LoaderCircle } from 'lucide-react';
-import { useChatContext } from '@contexts/ChatContext';
+
+import { useChatContext } from '../ChatContext';
 
 function ChatMemoryIndicator() {
 	const { currentChatId, isLoading } = useChatContext();
