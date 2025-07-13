@@ -32,6 +32,7 @@ export function ChatInputForm() {
 			form.reset({ files: [] });
 		} catch (error) {
 			console.error('Error submitting files:', error);
+			toast('Error submitting files');
 		}
 	};
 
@@ -44,6 +45,7 @@ export function ChatInputForm() {
 			await sendMessage(message);
 		} catch (error) {
 			console.error('Error submitting message:', error);
+			toast('Error submitting message');
 		}
 	};
 

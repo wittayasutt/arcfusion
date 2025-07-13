@@ -19,6 +19,8 @@ import {
 } from '../services';
 import { type ChatItemType, type MessageType } from '../types';
 
+// TODO: Refactor this file, split into reducers, action, hooks, etc.
+
 const initialState: ChatState = {
 	chats: [],
 	currentChatId: null,
