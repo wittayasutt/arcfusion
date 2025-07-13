@@ -12,7 +12,11 @@ function CarouselMessages({ messages }: CarouselMessagesProps) {
 		<Carousel className="cursor-pointer">
 			<CarouselContent className="ml-0 gap-2">
 				{messages.map((message) => (
-					<CarouselMessage message={message.message} key={message.id} />
+					<CarouselMessage
+						itemsPerView={3}
+						message={message.message}
+						key={message.id}
+					/>
 				))}
 			</CarouselContent>
 		</Carousel>
