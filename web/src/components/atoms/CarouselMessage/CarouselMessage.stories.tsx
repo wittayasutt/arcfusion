@@ -12,7 +12,7 @@ const meta = {
 	tags: ['autodocs'],
 	decorators: [
 		(Story) => (
-			<Carousel>
+			<Carousel className="max-w-xs">
 				<CarouselContent className="ml-auto">
 					<Story />
 				</CarouselContent>
