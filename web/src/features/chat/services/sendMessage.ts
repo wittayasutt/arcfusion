@@ -57,7 +57,13 @@ export const useChatSendMessage = (): UseMutationResult<
 
 			// Optimistically update the chat
 			queryClient.setQueryData(['chat', chatId], (prev: ChatType) => {
-				if (!prev) return prev;
+				if (!prev) {
+					return {
+						chat_id: chatId,
+						messages: [optimisticMessage],
+						message_count: 1,
+					};
+				}
 				return {
 					...prev,
 					messages: [...(prev.messages || []), optimisticMessage],
