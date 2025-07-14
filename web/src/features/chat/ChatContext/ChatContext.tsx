@@ -17,7 +17,7 @@ import {
 	useChatSendMessage,
 	useChatUploadFiles,
 } from '../services';
-import { type ChatItemType, type MessageType } from '../types';
+import { type ChatItemType, type FileType, type MessageType } from '../types';
 
 // TODO: Refactor this file, split into reducers, action, hooks, etc.
 
@@ -204,7 +204,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
 	useEffect(() => {
 		if (allChats) {
-			setChats(allChats.chats.reverse());
+			setChats(allChats?.chats?.reverse());
 		}
 	}, [allChats]);
 
